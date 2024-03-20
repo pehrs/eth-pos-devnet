@@ -16,9 +16,7 @@ try {
   process.exit(1);
 }
 
-const genesisFilePath = "/geth/genesis.json";
-
-const genesisFile = await fs.readFile(genesisFilePath);
+const genesisFile = await fs.readFile("/config/genesis.json");
 
 const genesis = JSON.parse(genesisFile.toString());
 
@@ -36,5 +34,5 @@ for (let addr of address.split(",")) {
 }
 
 if (count > 0) {
-  await fs.writeFile(genesisFilePath, JSON.stringify(genesis, null, "  "));
+  await fs.writeFile("/geth/genesis.json", JSON.stringify(genesis, null, "  "));
 }

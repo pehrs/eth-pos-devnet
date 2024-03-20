@@ -1,23 +1,6 @@
 name: devnet-genesis
 
 services:
-  create-beacon-chain-genesis:
-    image: "gcr.io/prysmaticlabs/prysm/cmd/prysmctl"
-    command:
-      - testnet
-      - generate-genesis
-      - --fork=deneb
-      - --num-validators=3
-      - --genesis-time-delay=10
-      - --chain-config-file=/config/config.yml
-      - --geth-genesis-json-in=/config/genesis.json
-      - --geth-genesis-json-out=/geth/genesis.json
-      - --output-ssz=/prysm/genesis.ssz
-    volumes:
-      - ./config:/config:ro
-      - ./data/geth:/geth
-      - ./data/prysm:/prysm
-
   geth-genesis-funding:
     image: "node:20-alpine"
     working_dir: /funding
@@ -28,9 +11,27 @@ services:
     volumes:
       - ./funding:/funding
       - ./data/geth:/geth
+      - ./config:/config:ro
     entrypoint: ["node", "index.mjs"]
+
+  create-beacon-chain-genesis:
+    image: "gcr.io/prysmaticlabs/prysm/cmd/prysmctl"
+    command:
+      - testnet
+      - generate-genesis
+      - --fork=deneb
+      - --num-validators=3
+      - --genesis-time-delay=10
+      - --chain-config-file=/config/config.yml
+      - --geth-genesis-json-in=/geth/genesis.json
+      - --geth-genesis-json-out=/geth/genesis.json
+      - --output-ssz=/prysm/genesis.ssz
+    volumes:
+      - ./data/geth:/geth
+      - ./data/prysm:/prysm
+      - ./config/config.yml:/config/config.yml:ro
     depends_on:
-      create-beacon-chain-genesis:
+      geth-genesis-funding:
         condition: service_completed_successfully
 
   init-geth-genesis:
@@ -39,5 +40,5 @@ services:
     volumes:
       - ./data/geth:/geth
     depends_on:
-      geth-genesis-funding:
+      create-beacon-chain-genesis:
         condition: service_completed_successfully
