@@ -18,11 +18,26 @@ services:
       - ./data/geth:/geth
       - ./data/prysm:/prysm
 
-  geth-genesis:
+  geth-genesis-funding:
+    image: "node:20-alpine"
+    working_dir: /funding
+    # 2.24.0 required
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - ./funding:/funding
+      - ./data/geth:/geth
+    entrypoint: ["node", "index.mjs"]
+    depends_on:
+      create-beacon-chain-genesis:
+        condition: service_completed_successfully
+
+  init-geth-genesis:
     image: "ethereum/client-go:v1.13.14"
     command: init --datadir /geth /geth/genesis.json
     volumes:
       - ./data/geth:/geth
     depends_on:
-      create-beacon-chain-genesis:
+      geth-genesis-funding:
         condition: service_completed_successfully

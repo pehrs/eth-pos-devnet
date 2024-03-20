@@ -4,13 +4,36 @@ Fork from https://github.com/OffchainLabs/eth-pos-devnet and support cancun/dene
 
 Refer to https://docs.prylabs.network/docs/advanced/proof-of-stake-devnet for the details
 
+## Prerequisites
+
+- the `latest` docker-compose, the compose file requires version 2.24.0
+
 ## Quick start
+
+**Clean and reset all data**
 
 ```
 make clean
+```
 
+**Init genesis**
+
+If you would like to fund address you have, just add `.env` file with following configurations
+
+```
+# comma separated address
+GENESIS_ADDRESS=
+# funding amount
+GENESIS_AMOUNT=0xfffffffffffffffffffff
+```
+
+```
 make init
+```
 
+**Start**
+
+```
 make start
 ```
 
