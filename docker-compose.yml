@@ -17,6 +17,8 @@ services:
       - --ws.origins=*
       - --syncmode=full
       - --gcmode=archive
+      - --history.transactions=0
+      - --history.state=0
     ports:
       - 8545:8545
       - 8546:8546
