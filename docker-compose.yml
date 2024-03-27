@@ -34,7 +34,7 @@ services:
         max-file: "10"
 
   beacon-chain:
-    image: "gcr.io/prysmaticlabs/prysm/beacon-chain:v5.0.1"
+    image: "gcr.io/prysmaticlabs/prysm/beacon-chain:v5.0.2"
     command:
       - --datadir=/prysm/beacondata
       - --min-sync-peers=0
@@ -64,7 +64,7 @@ services:
         max-file: "10"
 
   validator:
-    image: "gcr.io/prysmaticlabs/prysm/validator:v5.0.1"
+    image: "gcr.io/prysmaticlabs/prysm/validator:v5.0.2"
     command:
       - --beacon-rpc-provider=beacon-chain:4000
       - --datadir=/prysm/validatordata
