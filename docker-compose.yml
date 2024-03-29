@@ -7,12 +7,12 @@ services:
       - --networkid=48815
       - --nodiscover
       - --http
-      - --http.api=eth,net,web3
+      - --http.api=eth,net,web3,debug
       - --http.addr=0.0.0.0
       - --http.corsdomain=*
       - --http.vhosts=*
       - --ws
-      - --ws.api=eth,net,web3
+      - --ws.api=eth,net,web3,debug
       - --ws.addr=0.0.0.0
       - --ws.origins=*
       - --syncmode=full
