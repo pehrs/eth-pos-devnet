@@ -4,6 +4,7 @@ reset:
 	rm -Rf ./data
 
 init:
+	docker-compose pull
 	docker-compose -f docker-compose-init.yaml up
 	docker-compose -f docker-compose-init.yaml down
 
