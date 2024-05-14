@@ -37,6 +37,12 @@ make init
 make start
 ```
 
+## Genesis contract
+
+1. `0x4242424242424242424242424242424242424242` the deposit contract
+2. `0x4e59b44847b379578588920ca78fbf26c0b4956c` the create2 deployer
+3. `0x000F3df6D732807Ef1319fB7B8bB8522d0Beac02` and its deployer`0x0B799C86a49DEeb90402691F1041aa3AF2d3C875` the EIP-4788 Beacon Roots contract.
+
 ## The fee recipient address for testing
 
 **Note: Do NOT send real ETH to the address.**
