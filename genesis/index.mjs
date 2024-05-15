@@ -23,6 +23,21 @@ for (const [address, value] of Object.entries(genesis.alloc || {})) {
   alloc[address.toLowerCase()] = value;
 }
 
+for (let addr of env.GENESIS_ADDRESS?.split(",")) {
+  if (/^(0x)?[0-9a-fA-F]{40}$/.test(addr)) {
+    if (addr.startsWith("0x")) {
+      addr = addr.slice(2);
+    }
+
+    addr = addr.toLowerCase();
+
+    const cur = alloc[addr] || {};
+    cur.balance = defaultBalance;
+    alloc[addr] = cur;
+    console.log("address", addr, "default balance", cur.balance);
+  }
+}
+
 for (const [envName, envValue] of Object.entries(env)) {
   if (!envName.startsWith("GENESIS")) {
     continue;
@@ -44,16 +59,24 @@ for (const [envName, envValue] of Object.entries(env)) {
     address = address.slice(2);
   }
 
-  const cur = alloc[address] || {};
+  const cur = alloc[address] || { balance: "0x0" };
 
   switch (kind) {
     case "BALANCE":
+      const overwrited = !!cur.balance;
       try {
         cur.balance = "0x" + BigInt(envValue).toString(16);
       } catch {
         cur.balance = defaultBalance;
       }
-      console.log("address", address, "balance", cur.balance);
+      console.log(
+        "address",
+        address,
+        "balance",
+        cur.balance,
+        "overwrited",
+        overwrited
+      );
       break;
     case "CODE":
       cur.code = envValue;
@@ -71,20 +94,6 @@ for (const [envName, envValue] of Object.entries(env)) {
   }
 
   alloc[address] = cur;
-}
-
-for (let addr of env.GENESIS_ADDRESS?.split(",")) {
-  if (/^(0x)?[0-9a-fA-F]{40}$/.test(addr)) {
-    if (addr.startsWith("0x")) {
-      addr = addr.slice(2);
-    }
-
-    addr = addr.toLowerCase();
-
-    const cur = alloc[addr] || {};
-    cur.balance = defaultBalance;
-    alloc[addr] = cur;
-  }
 }
 
 if (Object.keys(alloc).length > Object.keys(genesis.alloc).length) {

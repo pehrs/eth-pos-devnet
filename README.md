@@ -39,7 +39,8 @@ And the result will be
   },
   "0002538c7bb308b5042f279e2c10b466b80797c9": {
     "nonce": "0x1",
-    "code": "0x363d3d373d3d3d363d73bebebebebebebebebebebebebebebebebebebebe5af43d82803e903d91602b57fd5bf3"
+    "code": "0x363d3d373d3d3d363d73bebebebebebebebebebebebebebebebebebebebe5af43d82803e903d91602b57fd5bf3",
+    "balance": "0x0"
   },
   "000352a341aac0a2437c33edceada93bf4908fd8": {
     "balance": "0xfffffffffffffffffffff"
