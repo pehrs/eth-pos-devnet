@@ -1,15 +1,15 @@
 name: devnet-genesis
 
 services:
-  geth-genesis-funding:
+  custom-geth-genesis:
     image: "node:20-alpine"
-    working_dir: /funding
+    working_dir: /genesis
     # 2.24.0 required
     env_file:
       - path: .env
         required: false
     volumes:
-      - ./funding:/funding
+      - ./genesis:/genesis
       - ./data/geth:/geth
       - ./config:/config:ro
     entrypoint: ["node", "index.mjs"]
@@ -31,7 +31,7 @@ services:
       - ./data/prysm:/prysm
       - ./config/config.yml:/config/config.yml:ro
     depends_on:
-      geth-genesis-funding:
+      custom-geth-genesis:
         condition: service_completed_successfully
 
   init-geth-genesis:

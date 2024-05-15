@@ -22,9 +22,29 @@ If you would like to fund address you have, just add `.env` file with following 
 
 ```
 # comma separated address
-GENESIS_ADDRESS=
-# funding amount
-GENESIS_AMOUNT=0xfffffffffffffffffffff
+GENESIS_ADDRESS=0x0001aEBC06288F578Eb01002a99E854cED86bC4F
+# the default balance
+GENESIS_BALANCE_default=0xfffffffffffffffffffff
+GENESIS_BALANCE_0x0001aEBC06288F578Eb01002a99E854cED86bC4F=0x64
+GENESIS_NONCE_0x0002538C7BB308B5042f279e2C10b466b80797C9=0x1
+GENESIS_CODE_0x0002538C7BB308B5042f279e2C10b466b80797C9=0x363d3d373d3d3d363d73bebebebebebebebebebebebebebebebebebebebe5af43d82803e903d91602b57fd5bf3
+```
+
+And the result will be
+
+```json
+{
+  "0001aebc06288f578eb01002a99e854ced86bc4f": {
+    "balance": "0x64"
+  },
+  "0002538c7bb308b5042f279e2c10b466b80797c9": {
+    "nonce": "0x1",
+    "code": "0x363d3d373d3d3d363d73bebebebebebebebebebebebebebebebebebebebe5af43d82803e903d91602b57fd5bf3"
+  },
+  "000352a341aac0a2437c33edceada93bf4908fd8": {
+    "balance": "0xfffffffffffffffffffff"
+  }
+}
 ```
 
 ```
