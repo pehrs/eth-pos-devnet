@@ -2,12 +2,16 @@ import fs from "node:fs/promises";
 import { env } from "node:process";
 
 let defaultBalance = env.GENESIS_BALANCE_default;
-try {
-  defaultBalance = "0x" + BigInt(defaultBalance).toString(16);
-  console.log("default funding amount", defaultBalance);
-} catch {
-  console.log("invalid amount", defaultBalance);
-  process.exit(1);
+if (defaultBalance) {
+  try {
+    defaultBalance = "0x" + BigInt(defaultBalance).toString(16);
+    console.log("default funding amount", defaultBalance);
+  } catch {
+    console.log("invalid amount", defaultBalance);
+    process.exit(1);
+  }
+} else {
+  defaultBalance = "0x0";
 }
 
 const genesisFile = await fs.readFile("/config/genesis.json");
@@ -23,7 +27,7 @@ for (const [address, value] of Object.entries(genesis.alloc || {})) {
   alloc[address.toLowerCase()] = value;
 }
 
-for (let addr of env.GENESIS_ADDRESS?.split(",")) {
+for (let addr of (env.GENESIS_ADDRESS || "").split(",")) {
   if (/^(0x)?[0-9a-fA-F]{40}$/.test(addr)) {
     if (addr.startsWith("0x")) {
       addr = addr.slice(2);
@@ -98,5 +102,6 @@ for (const [envName, envValue] of Object.entries(env)) {
 
 if (Object.keys(alloc).length > Object.keys(genesis.alloc).length) {
   genesis.alloc = alloc;
-  await fs.writeFile("/geth/genesis.json", JSON.stringify(genesis, null, "  "));
 }
+
+await fs.writeFile("/geth/genesis.json", JSON.stringify(genesis, null, "  "));
