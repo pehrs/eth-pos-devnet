@@ -2,7 +2,7 @@ name: devnet
 
 services:
   geth:
-    image: "ethereum/client-go:v1.14.4"
+    image: "ethereum/client-go:v1.14.5"
     command:
       - --networkid=48815
       - --nodiscover
@@ -69,7 +69,7 @@ services:
       - --beacon-rpc-provider=beacon-chain:4000
       - --datadir=/prysm/validatordata
       - --accept-terms-of-use
-      - --interop-num-validators=3
+      - --interop-num-validators=1
       - --interop-start-index=0
       - --chain-config-file=/config/config.yml
     depends_on:

@@ -20,7 +20,7 @@ services:
       - testnet
       - generate-genesis
       - --fork=deneb
-      - --num-validators=3
+      - --num-validators=1
       - --genesis-time-delay=10
       - --chain-config-file=/config/config.yml
       - --geth-genesis-json-in=/geth/genesis.json
@@ -35,7 +35,7 @@ services:
         condition: service_completed_successfully
 
   init-geth-genesis:
-    image: "ethereum/client-go:v1.14.4"
+    image: "ethereum/client-go:v1.14.5"
     command: init --cache.preimages=true --datadir /geth /geth/genesis.json
     volumes:
       - ./data/geth:/geth
