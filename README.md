@@ -66,11 +66,30 @@ make start
 4. `0x000F3df6D732807Ef1319fB7B8bB8522d0Beac02` the EIP-4788 Beacon Roots contract
 5. `0x1820a4B7618BdE71Dce8cdc73aAB6C95905faD24` the EIP-1820 Pseudo-introspection Registry Contract
 
-## The fee recipient address for testing
+## Custom block pruducing period
 
-**Note: Do NOT send real ETH to the address.**
+Update it in the `config/config.yml`
 
 ```
-Address 0x123463a4b065722e99115d6c222f267d9cabb524
-The private key 2e0834786285daccd064ca17f1654f67b4aef298acbb82cef9ec422fb4975622
+SECONDS_PER_SLOT: 3
+SLOTS_PER_EPOCH: 6
+```
+
+## The fee recipient address for testing
+
+```
+WARNING: These accounts, and their private keys, are publicly known.
+Any funds sent to them on Mainnet or any other live network WILL BE LOST.
+
+Mnemonic
+
+test test test test test test test test test test test junk
+
+Address
+
+0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+
+key
+
+0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff8
 ```

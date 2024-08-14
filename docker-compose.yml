@@ -2,7 +2,7 @@ name: devnet
 
 services:
   geth:
-    image: "ethereum/client-go:v1.14.5"
+    image: "ethereum/client-go:v1.14.8"
     command:
       - --networkid=48815
       - --nodiscover
@@ -48,7 +48,7 @@ services:
       - --grpc-gateway-host=0.0.0.0
       - --execution-endpoint=/geth/geth.ipc
       - --accept-terms-of-use
-      - --suggested-fee-recipient=0x123463a4b065722e99115d6c222f267d9cabb524
+      - --suggested-fee-recipient=0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
       - --minimum-peers-per-subnet=0
     ports:
       - 4000:4000
