@@ -5,9 +5,12 @@ services:
     image: "node:20-alpine"
     working_dir: /genesis
     # 2.24.0 required
-    env_file:
-      - path: .env
-        required: false
+    # env_file:
+    #   - path: .env
+    #     required: false
+    environment:
+      - GENESIS_ADDRESS=${GENESIS_ADDRESS}
+      - GENESIS_BALANCE_default=0xfffffffffffffffffffff
     volumes:
       - ./genesis:/genesis
       - ./data/geth:/geth

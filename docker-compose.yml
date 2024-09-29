@@ -19,6 +19,10 @@ services:
       - --gcmode=archive
       - --history.transactions=0
       - --history.state=0
+      - --verbosity=5
+      - --log.debug=true
+      #- --miner.gaslimit=9000000000000
+      #- --miner.gasprice=115025187511
     ports:
       - 8545:8545
       - 8546:8546
